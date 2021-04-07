@@ -41,7 +41,7 @@ std::istream &operator >> (std::istream &in, Vector &tmp);
  |      Tablice wypelniona wartoscia 0.                                       |
  */
 Vector::Vector() {
-    for (int i = 0; i < SIZE; i++) {
+    for (int i = 0; i < SIZE; ++i) {
         size[i] = 0;
     }
 }
@@ -56,7 +56,7 @@ Vector::Vector() {
  */
 
 Vector::Vector(double tmp[SIZE]) {
-    for (int i = 0; i < SIZE; i++) {
+    for (int i = 0; i < SIZE; ++i) {
         size[i] = tmp[i];
     }
 }
@@ -73,7 +73,7 @@ Vector::Vector(double tmp[SIZE]) {
  */
 Vector Vector::operator + (const Vector &v) {
     Vector result;
-    for (int i = 0; i < SIZE; i++) {
+    for (int i = 0; i < SIZE; ++i) {
         result[i] = size[i] += v[i];
     }
     return result;
@@ -91,7 +91,7 @@ Vector Vector::operator + (const Vector &v) {
  */
 Vector Vector::operator - (const Vector &v) {
     Vector result;
-    for (int i = 0; i < SIZE; i++) {
+    for (int i = 0; i < SIZE; ++i) {
         result[i] = size[i] -= v[i];
     }
     return result;
@@ -110,7 +110,7 @@ Vector Vector::operator - (const Vector &v) {
 
 Vector Vector::operator * (const double &tmp) {
     Vector result;
-    for (int i = 0; i < SIZE; i++) {
+    for (int i = 0; i < SIZE; ++i) {
         result[i] = size[i] *= tmp;
     }
     return result;
@@ -130,7 +130,7 @@ Vector Vector::operator * (const double &tmp) {
 Vector Vector::operator / (const double &tmp) {
     Vector result;
 
-    for (int i = 0; i < SIZE; i++) {
+    for (int i = 0; i < SIZE; ++i) {
         result[i] = size[i] / tmp;
     }
 
@@ -172,7 +172,7 @@ double &Vector::operator[](int index) {
  |      tmp - wektor.                                                         |
  */
 std::ostream &operator << (std::ostream &out, Vector const &tmp) {
-    for (int i = 0; i < SIZE; i++) {
+    for (int i = 0; i < SIZE; ++i) {
         out << "[ " << tmp[i] << " ]\n";
     }
     return out;
@@ -186,7 +186,7 @@ std::ostream &operator << (std::ostream &out, Vector const &tmp) {
  |      tmp - wektor.                                                         |
  */
 std::istream &operator >> (std::istream &in, Vector &tmp) {
-    for (int i = 0; i < SIZE; i++) {
+    for (int i = 0; i < SIZE; ++i) {
         in >> tmp[i];
     }
     std::cout << std::endl;
