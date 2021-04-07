@@ -141,12 +141,12 @@ int main() {
    //  na dwa sposoby:
    //   1. Rysowane jako linia ciagl o grubosci 2 piksele
    //
-  Lacze.DodajNazwePliku("prostokat.dat",PzG::RR_Ciagly,2);
+  Lacze.DodajNazwePliku("datasets/prostokat.dat",PzG::RR_Ciagly,2);
    //
    //   2. Rysowane jako zbior punktow reprezentowanych przez kwadraty,
    //      których połowa długości boku wynosi 2.
    //
-  Lacze.DodajNazwePliku("prostokat.dat",PzG::RR_Punktowy,2);
+  Lacze.DodajNazwePliku("datasets/prostokat.dat",PzG::RR_Punktowy,2);
    //
    //  Ustawienie trybu rysowania 2D, tzn. rysowany zbiór punktów
    //  znajduje się na wspólnej płaszczyźnie. Z tego powodu powoduj
@@ -155,7 +155,7 @@ int main() {
   Lacze.ZmienTrybRys(PzG::TR_2D);
 
   PrzykladZapisuWspolrzednychDoStrumienia(std::cout,0);
-  if (!PrzykladZapisuWspolrzednychDoPliku("prostokat.dat",0)) return 1;
+  if (!PrzykladZapisuWspolrzednychDoPliku("datasets/prostokat.dat",0)) return 1;
   Lacze.Rysuj(); // <- Tutaj gnuplot rysuje, to co zapisaliśmy do pliku
   std::cout << "Naciśnij ENTER, aby kontynuowac" << std::endl;
   std::cin.ignore(100000,'\n');
@@ -163,7 +163,7 @@ int main() {
    // Ponownie wypisuje wspolrzedne i rysuje prostokąt w innym miejscu.
    //
   PrzykladZapisuWspolrzednychDoStrumienia(std::cout,50);
-  if (!PrzykladZapisuWspolrzednychDoPliku("prostokat.dat",50)) return 1;
+  if (!PrzykladZapisuWspolrzednychDoPliku("datasets/prostokat.dat",50)) return 1;
   Lacze.Rysuj(); // <- Tutaj gnuplot rysuje, to co zapisaliśmy do pliku
   std::cout << "Naciśnij ENTER, aby kontynuowac" << std::endl;
   std::cin.ignore(100000,'\n');
