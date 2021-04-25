@@ -16,6 +16,7 @@
 #include "example.h"
 #include "vector.hh"
 #include "matrix.hh"
+#include "rectangle.hh"
 #include "../include/lacze_do_gnuplota.hh"
 
 /*!
@@ -66,11 +67,7 @@ void PrzykladZapisuWspolrzednychDoStrumienia( std::ostream&     StrmWy,
   StrmWy << std::setw(16) << std::fixed << std::setprecision(10) << x3+Przesuniecie 
          << std::setw(16) << std::fixed << std::setprecision(10) << y3+Przesuniecie << std::endl;
   StrmWy << std::setw(16) << std::fixed << std::setprecision(10) << x4+Przesuniecie 
-         << std::setw(16) << std::fixed << std::setprecision(10) << y4+Przesuniecie << std::endl;
-  StrmWy << std::setw(16) << std::fixed << std::setprecision(10) << x1+Przesuniecie 
-         << std::setw(16) << std::fixed << std::setprecision(10) << y1+Przesuniecie << std::endl; 
-                             // Jeszcze raz zapisujemy pierwszy punkt,
-                             // aby gnuplot narysowal zamkniętą linię.
+         << std::setw(16) << std::fixed << std::setprecision(10) << y4+Przesuniecie << std::endl; 
 }
 
 
@@ -121,16 +118,19 @@ int main() {
   std::cout << "Vector:" << std::endl;
   Vector tmpV1 = Vector();
   std::cout << "Vector - konstruktor bezparametryczny:\n" << tmpV1 << std::endl;
-  double argumentsV[] = {1.0, 2.0};
+  double argumentsV[] = {2.0, 2.0};
   Vector tmpV2 = Vector(argumentsV);
   std::cout << "Vector - konstruktor parametryczny:\n" << tmpV2 << std::endl;
 
   std::cout << "Matrix:" << std::endl;
   Matrix tmpM1 = Matrix();
   std::cout << "Matrix - konstruktor bezparametryczny:\n" << tmpM1 << std::endl;
-  double argumentsM[][SIZE] = {{1.0, 2.0},{3.0, 4.0}};
+  double argumentsM[][SIZE] = {{1.0, 3.0},{4.0, 2.0}};
   Matrix tmpM2 = Matrix(argumentsM);
   std::cout << "Matrix - konstruktor parametryczny:\n" << tmpM2 << std::endl;
+
+  Rectangle tmpR1;
+  std::cout <<"Rectangle - konstruktor bezparametryczny:\n" << tmpR1 << std::endl;
 
     PzG::LaczeDoGNUPlota  Lacze;  // Ta zmienna jest potrzebna do wizualizacji
                                 // rysunku prostokata
