@@ -117,6 +117,34 @@ const double &Matrix::operator () (unsigned int row, unsigned int column) const 
     return value[row][column];
 }
 
+void Matrix::MatrixRotate(double angle)
+{
+    if(SIZE != 2)
+    std::cout << ("niewlasciwy rozmiar macierzy!");
+    else
+    {
+    double angle_radian = angle * M_PI / 180;
+
+    value[0][0] = cos(angle_radian);
+    value[1][0] = -sin(angle_radian);
+    value[0][1]= sin(angle_radian);
+    value[1][1] = cos(angle_radian);
+    }
+}
+
+bool Matrix::operator == (const Matrix &matrix) const
+{
+    for(int i = 0; i < SIZE; i++)
+       for(int j = 0; j < SIZE; j++)
+          if(this->value[i][j] != matrix.value[i][j])
+          return false;
+    return true;
+}
+
+bool Matrix::operator != (const Matrix &matrix) const
+{
+    return !(*this == matrix);
+}
 
 
 /******************************************************************************
@@ -150,17 +178,6 @@ std::ostream &operator << (std::ostream &out, const Matrix &mat) {
     return out;
 }
 
-void Matrix::MatrixRotate(double angle)
-{
-    #if(SIZE != 2)
-    #error To jest metoda do generowania macierzy obrotu w 2D
-    #endif
-    double angle_radian = angle * M_PI / 180;
 
-    value[0][0] = cos(angle_radian);
-    value[1][0] = -sin(angle_radian);
-    value[0][1]= sin(angle_radian);
-    value[1][1] = cos(angle_radian);
-}
 
 
