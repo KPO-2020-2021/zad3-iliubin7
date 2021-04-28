@@ -16,22 +16,22 @@ public:
 
    Rectangle(Vector const &v1X, Vector const &v2X, Vector const &v3X, Vector const &v4X);      // Konstruktor klasy
 
-   Rectangle translation(Vector const &t) const;
+   Rectangle translation(Vector const &t) const;   // metoda translacji prostokata o zadany wektor
 
-   Rectangle rotate(const double &angle) const; 
+   Rectangle rotate(const double &angle) const;     // metoda rotacji prostokata
 
-   void new_rectangle(Vector &v1X, Vector &v2x, Vector &v3X, Vector &v4X) const;  
+   void new_rectangle(Vector &v1X, Vector &v2x, Vector &v3X, Vector &v4X) const;  // metoda do generowania nowego prostokata
 
-   bool check_length() const;   // metoda sprawdzania dlugosci bokow prostokata
+   bool check_length() const;   // metoda sprawdzania dlugosci przeciwleglych bokow prostokata
 
    bool check_angle() const;     
 
-   void Rectangle::Writetofile(std:: string filename, int mode); 
+   void Writetofile(std:: string filename, int mode); // metoda zapisu danych do pliku
 
 };
 
-std::ostream &operator << (std::ostream &out, Rectangle const &Rec);
+std::ostream &operator << (std::ostream &out, Rectangle const &Rec);  // Przeciazenie operatora wpisywania 
 
-std::ofstream &operator << (std::ofstream &fout, Rectangle const &Rec); 
+std::ofstream &operator << (std::ofstream &fout, Rectangle const &Rec); // Przeciazenie operatora wypisywania 
 
 

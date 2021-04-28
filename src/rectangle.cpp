@@ -28,9 +28,9 @@ Rectangle::Rectangle(Vector const &v1X, Vector const &v2X, Vector const &v3X, Ve
     v2 = v2X;
     v3 = v3X;
     v4 = v4X;
-    Rectangle a;
-    a = *this;
-    if (!a.check_length()){
+    Rectangle v1;
+    v1 = *this;
+    if (!v1.check_length()){
            std::cerr << "ERROR: przeciwlegle boki nie sa rowne!" << std::endl;
     }
 }
