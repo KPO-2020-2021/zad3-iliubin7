@@ -26,9 +26,9 @@ public:
 
     void MatrixRotate(double angle);  // metoda generujaca macierz obrotu o zadany kat
     
-    bool operator == (const Matrix &matrix) const;  // przeciazenie operatora == porownywania wartosci macierzy
+    bool operator == (const Matrix &matrix) const;  // przeciazenie operatora porownywania dwoch macierzy
     
-    bool operator != (const Matrix &matrix) const;  // przeciazenie operatora != porownywania wartosci macierzy
+    bool operator != (const Matrix &matrix) const;  // przeciazenie operatora != porownywania dwoch macierzy
 };
 
 std::istream &operator >> (std::istream &in, Matrix &mat); // Przeciazenie operatora wpisywania wartosci macierzy
