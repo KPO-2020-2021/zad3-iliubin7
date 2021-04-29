@@ -191,6 +191,20 @@ Vector Vector::rotation(const double &angle) const
     return rotate;
 }
 
+double Vector::kat_obrotu() const
+{
+    
+}
+
+/******************************************************************************
+ |  Przeciazenie operatora ==                                                |
+ |  Argumenty:                                                                |
+ |      v - drugi skladnik porownania
+    Zwraca:
+    wartosc 1 gdy skladniki pierwszego wektora sa mniejsze niz skladniki drugiego,
+    a w przypadku przeciwnym zwraca wartosc 0                                                         |
+ */
+
 bool Vector::operator == (const Vector v) const
 {
     if(abs(size[0] - v[0]) < MIN_DIFF && abs(size[1]- v[1]) < MIN_DIFF)
