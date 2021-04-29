@@ -18,9 +18,9 @@ public:
 
    Rectangle translation(Vector const &t) const;   // metoda translacji prostokata o zadany wektor
 
-   Rectangle rotate(const double &angle) const;     // metoda rotacji prostokata
+   bool rotate(const double angle, int n) const;     // metoda rotacji prostokata
 
-   void new_rectangle(Vector &v1X, Vector &v2x, Vector &v3X, Vector &v4X) const;  // metoda do generowania nowego prostokata
+   void new_rectangle(Vector &v1X, Vector &v2X, Vector &v3X, Vector &v4X) const;  // metoda do generowania nowego prostokata
 
    bool check_length() const;   // metoda sprawdzania dlugosci przeciwleglych bokow prostokata
 

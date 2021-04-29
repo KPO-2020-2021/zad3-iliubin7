@@ -35,6 +35,13 @@ Rectangle::Rectangle(Vector const &v1X, Vector const &v2X, Vector const &v3X, Ve
     }
 }
 
+/******************************************************************************
+ |  metoda translacji prostokata o zadany wektor                                                |
+ |  Argumenty:                                                                    |
+ |      t - zadany wektor translacji                                                      |
+ |  Zwraca:                                                                       |
+ |      prostokat z przesunietymi wierzcholkami o zadany wektor                                        |
+ */
 Rectangle Rectangle::translation(Vector const &t) const
 {
     Rectangle translate;
@@ -46,6 +53,7 @@ Rectangle Rectangle::translation(Vector const &t) const
     return translate;
 }
 
+// metoda zapisu danych do pliku
 void Rectangle::Writetofile(std:: string filename, int mode)
 {
         std::ofstream Dataf;
@@ -57,6 +65,47 @@ void Rectangle::Writetofile(std:: string filename, int mode)
         fclose(stdout);
 }
 
+/******************************************************************************
+ |  metoda, ktora zwraca wierzcholki prostokata                                                 |
+ |  Argumenty:                                                                    |
+ |      &v1X, &v2X, &v3X, &v4X                                                    |
+ |  Zwraca:                                                                       |
+ |      zmienione wartosci wektorow z wejscia                                          |
+ */
+
+void Rectangle::new_rectangle(Vector &v1X, Vector &v2X, Vector &v3X, Vector &v4X) const
+{
+     
+}
+
+bool Rectangle::rotate(const double angle, int n) const
+{
+       if((static_cast <int> (angle) % 360) == 0)
+           return false;
+
+       Matrix matrixRotate;
+       matrixRotate.MatrixRotate(angle);
+       v1 = v1 * matrixRotate;
+       v2 = v2 * matrixRotate;
+       v3 = v3 * matrixRotate;
+       v4 = v4 * matrixRotate;
+
+       return true;   
+
+}
+
+// metoda sprawdzania dlugosci bokow prostokata
+bool Rectangle::check_length() const
+{
+   
+}
+
+/******************************************************************************
+ |  Przeciazenie operatora <<                                          |
+ |  Argumenty:                                                                |
+ |      out - strumien wyjsciowy,                                              |
+ |      Rec- prostokat.                                                         |
+ */
 std::ostream& operator << (std::ostream &out, Rectangle const &Rec)
 {
     out << Rec.v1 << std::endl;
@@ -66,6 +115,12 @@ std::ostream& operator << (std::ostream &out, Rectangle const &Rec)
     return out;
 }
 
+/******************************************************************************
+ |  Przeciazenie operatora << dla pliku                                         |
+ |  Argumenty:                                                                |
+ |      fout - strumien wyjsciowy,                                              |
+ |      Rec- prostokat.                                                         |
+ */
 std::ofstream& operator << (std::ofstream &fout, Rectangle const &Rec)
 {
     fout << std::setprecision(10) << std::fixed;
