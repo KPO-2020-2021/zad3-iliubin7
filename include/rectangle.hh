@@ -27,11 +27,14 @@ public:
    bool check_angle() const;     
 
    void Writetofile(std:: string filename, int mode); // metoda zapisu danych do pliku
+   
+   friend std::ostream &operator << (std::ostream &out, Rectangle const &Rec);  // Przeciazenie operatora wpisywania 
 
+   friend std::ofstream &operator << (std::ofstream &fout, Rectangle const &Rec); // Przeciazenie operatora wypisywania 
 };
 
-std::ostream &operator << (std::ostream &out, Rectangle const &Rec);  // Przeciazenie operatora wpisywania 
 
-std::ofstream &operator << (std::ofstream &fout, Rectangle const &Rec); // Przeciazenie operatora wypisywania 
+
+
 
 

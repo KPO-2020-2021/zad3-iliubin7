@@ -1,5 +1,5 @@
 
-#include "rectangle.hh"
+#include "../include/rectangle.hh"
 #include "../include/matrix.hh"
 #include <iostream>
 #include <cmath>
@@ -78,6 +78,14 @@ void Rectangle::new_rectangle(Vector &v1X, Vector &v2X, Vector &v3X, Vector &v4X
      
 }
 
+/******************************************************************************
+ |  metoda rotacji prostokata                                                 |
+ |  Argumenty:                                                                    |
+ |      angle - kat obrotu, 
+        n - ilosc                                                   |
+ |  Zwraca:                                                                       |
+ |      zmienione wartosci wektorow z wejscia                                          |
+ */
 bool Rectangle::rotate(const double angle, int n) const
 {
        if((static_cast <int> (angle) % 360) == 0)
@@ -119,7 +127,7 @@ std::ostream& operator << (std::ostream &out, Rectangle const &Rec)
  |  Przeciazenie operatora << dla pliku                                         |
  |  Argumenty:                                                                |
  |      fout - strumien wyjsciowy,                                              |
- |      Rec- prostokat.                                                         |
+ |      Rec - prostokat.                                                         |
  */
 std::ofstream& operator << (std::ofstream &fout, Rectangle const &Rec)
 {
