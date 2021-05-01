@@ -85,7 +85,7 @@ void Rectangle::new_rectangle(Vector &v1X, Vector &v2X, Vector &v3X, Vector &v4X
  |  metoda rotacji prostokata                                                 |
  |  Argumenty:                                                                    |
  |      angle - kat obrotu, 
-        n - ilosc                                                   |
+        n - ilosc obrotow                                                |
  |  Zwraca:                                                                       |
  |      zmienione wartosci wektorow z wejscia                                          |
  */
@@ -108,12 +108,11 @@ bool Rectangle::rotate(const double angle, int n) const
 // metoda sprawdzania dlugosci bokow prostokata
 bool Rectangle::check_length() const
 {
-   double length[4];
-   length[0] = v2[0] - v1[0];
-   length[1] = v3[0] - v4[0];
-   
-   length[2] = v4[1] - v1[1];
-   length[3] = v3[1] - v2[1];
+   double length[NUMBEROFVERTEX];
+   length[0] = (v2 - v1).modul();
+   length[1] = (v3 - v4).modul();
+   length[2] = (v4 - v1).modul();
+   length[3] = (v3 - v2).modul();
    if(length[0] < length[1])
    {
        // Boki length[0] i length[1] sa dluzsze, a boki length[2] i length[3] sa krotsze
@@ -176,7 +175,7 @@ std::ostream& operator << (std::ostream &out, Rectangle const &Rec)
  */
 std::ofstream& operator << (std::ofstream &fout, Rectangle const &Rec)
 {
-    fout << std::setprecision(10) << std::fixed;
+    fout << std::setprecision(20) << std::fixed;
     fout << Rec.v1 << std::endl;
     fout << Rec.v2 << std::endl;
     fout << Rec.v3 << std::endl;

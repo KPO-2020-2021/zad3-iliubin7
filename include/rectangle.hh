@@ -5,6 +5,7 @@
 #include "matrix.hh"
 #include <fstream>
 #include <iostream>
+#define NUMBEROFVERTEX 4
 
 class Rectangle{
 
