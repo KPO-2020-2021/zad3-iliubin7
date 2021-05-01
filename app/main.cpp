@@ -118,14 +118,14 @@ int main() {
   std::cout << "Vector:" << std::endl;
   Vector tmpV1 = Vector();
   std::cout << "Vector - konstruktor bezparametryczny:\n" << tmpV1 << std::endl;
-  double argumentsV[] = {2.0, 2.0};
+  double argumentsV[] = {1.0, 2.0};
   Vector tmpV2 = Vector(argumentsV);
   std::cout << "Vector - konstruktor parametryczny:\n" << tmpV2 << std::endl;
 
   std::cout << "Matrix:" << std::endl;
   Matrix tmpM1 = Matrix();
   std::cout << "Matrix - konstruktor bezparametryczny:\n" << tmpM1 << std::endl;
-  double argumentsM[][SIZE] = {{1.0, 3.0},{4.0, 2.0}};
+  double argumentsM[][SIZE] = {{1.0, 2.0},{3.0, 4.0}};
   Matrix tmpM2 = Matrix(argumentsM);
   std::cout << "Matrix - konstruktor parametryczny:\n" << tmpM2 << std::endl;
 
