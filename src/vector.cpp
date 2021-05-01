@@ -91,27 +91,6 @@ Vector Vector::operator * (const double &tmp) {
 
 
 /******************************************************************************
- |  Realizuje dzielenie dwoch wektorow.                                       |
- |  Argumenty:                                                                |
- |      this - licznik dzielenia,                                             |
- |      v - mianownik dzielenia.                                              |
- |  Zwraca:                                                                   |
- |      Iloraz dwoch skladnikow przekazanych jako wskaznik                    |
- |      na parametr.                                                          |
- */
-
-Vector Vector::operator / (const double &tmp) {
-    Vector result;
-
-    for (int i = 0; i < SIZE; ++i) {
-        result[i] = size[i] / tmp;
-    }
-
-    return result;
-}
-
-
-/******************************************************************************
  |  Funktor wektora.                                                          |
  |  Argumenty:                                                                |
  |      index - index wektora.                                                |
@@ -165,14 +144,24 @@ std::istream &operator >> (std::istream &in, Vector &tmp) {
     std::cout << std::endl;
     return in;
 }
-
+/******************************************************************************
+ |  Metoda do znajdowania dlugosci wektora                                              |
+ |  Argumenty:                                                                |
+ |      brak                                              |
+ |  Zwraca:
+        dlugosc wektora                                                     |
+ */
+double Vector::modul() const
+{
+ return pow(size[0]*size[0] + size[1]*size[1], 0.5);       
+}
 
 /******************************************************************************
  |  Metoda rotacji wektora                                               |
  |  Argumenty:                                                                |
  |      angle - kat obrotu (podany w stopniach),                                              |
  |  Zwraca:
-        obracany wektor                                                       |
+        obrocony wektor                                                       |
  */
 Vector Vector::rotation(const double &angle) const
 {

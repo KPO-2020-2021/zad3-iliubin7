@@ -24,9 +24,9 @@ public:
 
     Vector operator * (const double &tmp);  // Przeciazenie operatora *
 
-    Vector operator / (const double &tmp);  // Przeciazenie operatora /
+    Vector rotation(const double &angle) const; 
 
-    Vector rotation(const double &angle) const;   
+    double modul() const;  // metoda do znajdowania dlugosci wektora
 
     double get_length() const;
 
