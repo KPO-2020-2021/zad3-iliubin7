@@ -59,7 +59,7 @@ Vector Matrix::operator * (Vector tmp) {
  |      this - macierz, czyli pierwszy skladnik dodawania,                     |
  |      v - wektor, czyli drugi skladnik dodawania.                                               |
  |  Zwraca:                                                                   |
- |      Macierz - iloczyn dwóch podanych macierzy.                  |
+ |      Macierz - suma dwóch podanych macierzy.                  |
  */
 Matrix Matrix::operator + (Matrix tmp) {
     Matrix result;
