@@ -153,7 +153,9 @@ std::istream &operator >> (std::istream &in, Vector &tmp) {
  */
 double Vector::modul() const
 {
- return pow(size[0]*size[0] + size[1]*size[1], 0.5);       
+   double result;
+   result = pow(size[0]*size[0] + size[1]*size[1], 0.5);
+   return result;      
 }
 
 /******************************************************************************
