@@ -117,6 +117,13 @@ const double &Matrix::operator () (unsigned int row, unsigned int column) const 
     return value[row][column];
 }
 
+/* 
+  Metoda generujaca macierz obrotu
+  Argumenty:
+      angle - podany kat (w stopniach)
+  Zwraca:
+     Macierz obrotu, czyli macierz wypelniona wartosciami cos i sin podanego kata przeksztalconego w radiany
+*/
 void Matrix::MatrixRotate(double angle)
 {
     if(SIZE != 2)
