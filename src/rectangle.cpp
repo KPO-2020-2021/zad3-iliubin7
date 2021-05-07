@@ -42,7 +42,7 @@ Rectangle::Rectangle(Vector const &v1X, Vector const &v2X, Vector const &v3X, Ve
  |  Zwraca:                                                                       |
  |      prostokat z przesunietymi wierzcholkami o zadany wektor                                        |
  */
-Rectangle Rectangle::translation(Vector const &t) const
+Rectangle Rectangle::translation(Vector const &t) 
 {
     Rectangle translate;
     translate.v1 = v1 + t;
@@ -73,7 +73,7 @@ void Rectangle::Writetofile(std:: string filename, int mode)
  |      zmienione wartosci wektorow z wejscia                                          |
  */
 
-void Rectangle::new_rectangle(Vector &v1X, Vector &v2X, Vector &v3X, Vector &v4X) const
+void Rectangle::new_rectangle(Vector &v1X, Vector &v2X, Vector &v3X, Vector &v4X)
 {
      v1 = v1X;
      v2 = v2X;
@@ -89,24 +89,24 @@ void Rectangle::new_rectangle(Vector &v1X, Vector &v2X, Vector &v3X, Vector &v4X
  |  Zwraca:                                                                       |
  |      zmienione wartosci wektorow z wejscia                                          |
  */
-bool Rectangle::rotate(const double angle, int n) const
+bool Rectangle::rotate(const double angle, int n)
 {
        if((static_cast <int> (angle) % 360) == 0)
            return false;
 
        Matrix matrixRotate;
        matrixRotate.MatrixRotate(angle);
-       v1 = v1 * matrixRotate;
-       v2 = v2 * matrixRotate;
-       v3 = v3 * matrixRotate;
-       v4 = v4 * matrixRotate;
+       v1 = matrixRotate * v1;
+       v2 = matrixRotate * v2;
+       v3 = matrixRotate * v3;
+       v4 = matrixRotate * v4;
 
        return true;   
 
 }
 
 // metoda sprawdzania dlugosci bokow prostokata
-bool Rectangle::check_length() const
+bool Rectangle::check_length()
 {
    double length[NUMBEROFVERTEX];
    length[0] = (v2 - v1).modul();

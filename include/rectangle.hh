@@ -17,13 +17,13 @@ public:
 
    Rectangle(Vector const &v1X, Vector const &v2X, Vector const &v3X, Vector const &v4X);      // Konstruktor klasy
 
-   Rectangle translation(Vector const &t) const;   // metoda translacji prostokata o zadany wektor
+   Rectangle translation(Vector const &t);   // metoda translacji prostokata o zadany wektor
 
-   bool rotate(const double angle, int n) const;     // metoda rotacji prostokata
+   bool rotate(const double angle, int n);     // metoda rotacji prostokata
 
-   void new_rectangle(Vector &v1X, Vector &v2X, Vector &v3X, Vector &v4X) const;  // metoda do generowania nowego prostokata
+   void new_rectangle(Vector &v1X, Vector &v2X, Vector &v3X, Vector &v4X);  // metoda do generowania nowego prostokata
 
-   bool check_length() const;   // metoda sprawdzania dlugosci przeciwleglych bokow prostokata
+   bool check_length(); // metoda sprawdzania dlugosci przeciwleglych bokow prostokata
 
    bool check_angle() const;     
 
