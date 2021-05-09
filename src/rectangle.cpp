@@ -115,7 +115,7 @@ bool Rectangle::check_length()
    length[1] = (v3 - v4).modul();
    length[2] = (v4 - v1).modul();
    length[3] = (v3 - v2).modul();
-   if(length[0] < length[2])
+   if(length[0] > length[2])
    {
        // Boki length[0] i length[1] sa dluzsze, a boki length[2] i length[3] sa krotsze
      if(length[0] == length[1])
