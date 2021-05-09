@@ -8,7 +8,7 @@
 // Konstruktor bezparametryczny
 Rectangle::Rectangle()
 {
-    double args1[2] = {4,4}, args2[2] = {2,4}, args3[2] = {2,1}, args4[2] = {4,1};
+    double args1[2] = {2,1}, args2[2] = {5,1}, args3[2] = {5,4}, args4[2] = {2,4};
     v1 = Vector(args1);
     v2 = Vector(args2);
     v3 = Vector(args3);
