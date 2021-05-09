@@ -24,7 +24,7 @@ public:
     
     const double &operator () (unsigned int row, unsigned int column) const; // Przeciazenie operatora funkcyjnego do pobierania wartosci macierzy
 
-    void MatrixRotate(double angle);  // metoda generujaca macierz obrotu o zadany kat
+    Matrix MatrixRotate(double angle);  // metoda generujaca macierz obrotu o zadany kat
     
     bool operator == (const Matrix &matrix) const;  // przeciazenie operatora porownywania dwoch macierzy
     
