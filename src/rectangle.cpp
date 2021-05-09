@@ -28,11 +28,6 @@ Rectangle::Rectangle(Vector const &v1X, Vector const &v2X, Vector const &v3X, Ve
     v2 = v2X;
     v3 = v3X;
     v4 = v4X;
-    Rectangle v1;
-    v1 = *this;
-    if (!v1.check_length()){
-           std::cerr << "ERROR: przeciwlegle boki nie sa rowne!" << std::endl;
-    }
 }
 
 /******************************************************************************
@@ -94,21 +89,21 @@ bool Rectangle::rotate(const double angle, const int n)
     
        if((static_cast <int> (angle) % 360) == 0)
            return false;
-     for(int i = 0; i < n; i++)
-    {
+        for(int i = 0; i < n; i++)
+        {
        Matrix matrixRotate;
        matrixRotate.MatrixRotate(angle);
        v1 = matrixRotate * v1;
        v2 = matrixRotate * v2;
        v3 = matrixRotate * v3;
        v4 = matrixRotate * v4;
-    
+        }
        return true;   
-    }
+    
 }
 
 // metoda sprawdzania dlugosci bokow prostokata
-bool Rectangle::check_length()
+void Rectangle::check_length()
 {
    double length[NUMBEROFVERTEX];
    length[0] = (v2 - v1).modul();

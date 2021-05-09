@@ -23,7 +23,7 @@ public:
 
    void new_rectangle(Vector &v1X, Vector &v2X, Vector &v3X, Vector &v4X);  // metoda do generowania nowego prostokata
 
-   bool check_length(); // metoda sprawdzania dlugosci przeciwleglych bokow prostokata
+   void check_length(); // metoda sprawdzania dlugosci przeciwleglych bokow prostokata
 
    bool check_angle() const;     
 
