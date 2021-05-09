@@ -4,7 +4,7 @@
 TEST_CASE("test vector konstruktor parametryczny"){
 
     Vector x, y;
-    double tab1[2] = {3, 3}, tab2[2] = {3,3};
+    double tab1[SIZE] = {3, 3}, tab2[SIZE] = {3,3};
     x = Vector(tab1);
     y = Vector(tab2);
     CHECK(x == y);
@@ -12,7 +12,7 @@ TEST_CASE("test vector konstruktor parametryczny"){
 
 TEST_CASE("test vector konstruktor bezparametryczny"){
     
-    double tab1[2]= {0, 0};
+    double tab1[SIZE]= {0, 0};
     Vector x, y = tab1;
     CHECK(x == y);
 
@@ -20,7 +20,7 @@ TEST_CASE("test vector konstruktor bezparametryczny"){
 TEST_CASE("test Vector suma")
 {
     Vector x, y, sum;
-    double tab1[2] = {1, 2}, tab2[2] = {4,0} , tab3[2] = {5, 2};
+    double tab1[SIZE] = {1, 2}, tab2[SIZE] = {4,0} , tab3[SIZE] = {5, 2};
     x = Vector(tab1);
     y = Vector(tab2);
     sum = Vector(tab3);
@@ -29,7 +29,7 @@ TEST_CASE("test Vector suma")
 TEST_CASE("test Vector roznica")
 {
     Vector x, y, res;
-    double tab1[2] = {4, 2}, tab2[2] = {3,3} , tab3[2] = {1, -1};
+    double tab1[SIZE] = {4, 2}, tab2[SIZE] = {3,3} , tab3[SIZE] = {1, -1};
     x = Vector(tab1);
     y = Vector(tab2);
     res = Vector(tab3);
@@ -39,7 +39,7 @@ TEST_CASE("test Vector roznica")
 TEST_CASE("test wyswietlanie vector standard")
 {
     Vector x;
-    double tab1[2] = {7, 3};
+    double tab1[SIZE] = {7, 3};
     x = Vector(tab1);
     std::ostringstream out;
     out << x;
@@ -49,7 +49,7 @@ TEST_CASE("test wyswietlanie vector standard")
 TEST_CASE("test == 10 miejsc po przecinku")
 {
    Vector x, y;
-   double tab1[2] = {1.0000000009, 2.0000000007}, tab2[2] = {1.0000000009, 2.0000000007};
+   double tab1[SIZE] = {1.0000000009, 2.0000000007}, tab2[SIZE] = {1.0000000009, 2.0000000007};
    x = Vector(tab1);
    y = Vector(tab2);
    CHECK(x == y);
@@ -57,7 +57,7 @@ TEST_CASE("test == 10 miejsc po przecinku")
 TEST_CASE("test == 20 miejsc po przecinku")
 {
    Vector x, y;
-   double tab1[2] = {1.00000000000000000009, 2.00000000000000000007}, tab2[2] = {1.00000000000000000009, 2.00000000000000000007};
+   double tab1[SIZE] = {1.00000000000000000009, 2.00000000000000000007}, tab2[SIZE] = {1.00000000000000000009, 2.00000000000000000007};
    x = Vector(tab1);
    y = Vector(tab2);
    CHECK(x == y);
@@ -65,7 +65,7 @@ TEST_CASE("test == 20 miejsc po przecinku")
 TEST_CASE("test wczytywanie vector standard")
 {
     Vector x;
-    double tab1[2] = {7, 3};
+    double tab1[SIZE] = {7, 3};
     x = Vector(tab1);
     std::istringstream in;
     in >> x;
@@ -75,7 +75,7 @@ TEST_CASE("test wczytywanie vector standard")
 TEST_CASE("test operatora []")
 {
     Vector x, y, z;
-    double tab1[2] = {6, 7}, tab2[2] = {8, 9}, tab3[2] = {21, 199};
+    double tab1[SIZE] = {6, 7}, tab2[SIZE] = {8, 9}, tab3[SIZE] = {21, 199};
     x = Vector(tab1);
     y = Vector(tab2);
     z = Vector(tab3);
