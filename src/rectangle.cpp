@@ -89,20 +89,22 @@ void Rectangle::new_rectangle(Vector &v1X, Vector &v2X, Vector &v3X, Vector &v4X
  |  Zwraca:                                                                       |
  |      zmienione wartosci wektorow z wejscia                                          |
  */
-bool Rectangle::rotate(const double angle, int n)
+bool Rectangle::rotate(const double angle, const int n)
 {
+    
        if((static_cast <int> (angle) % 360) == 0)
            return false;
-
+     for(int i = 0; i < n; i++)
+    {
        Matrix matrixRotate;
        matrixRotate.MatrixRotate(angle);
        v1 = matrixRotate * v1;
        v2 = matrixRotate * v2;
        v3 = matrixRotate * v3;
        v4 = matrixRotate * v4;
-
+    
        return true;   
-
+    }
 }
 
 // metoda sprawdzania dlugosci bokow prostokata
@@ -113,7 +115,7 @@ bool Rectangle::check_length()
    length[1] = (v3 - v4).modul();
    length[2] = (v4 - v1).modul();
    length[3] = (v3 - v2).modul();
-   if(length[0] < length[1])
+   if(length[0] < length[2])
    {
        // Boki length[0] i length[1] sa dluzsze, a boki length[2] i length[3] sa krotsze
      if(length[0] == length[1])

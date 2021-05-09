@@ -19,7 +19,7 @@ public:
 
    Rectangle translation(Vector const &t);   // metoda translacji prostokata o zadany wektor
 
-   bool rotate(const double angle, int n);     // metoda rotacji prostokata
+   bool rotate(const double angle, const int n);     // metoda rotacji prostokata
 
    void new_rectangle(Vector &v1X, Vector &v2X, Vector &v3X, Vector &v4X);  // metoda do generowania nowego prostokata
 
