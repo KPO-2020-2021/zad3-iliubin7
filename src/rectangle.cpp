@@ -20,7 +20,7 @@ Rectangle::Rectangle()
  |  Argumenty:                                                                    |
  |      v1X, v2X, v3X, v4X - cztery wektory, ktore reprezentuja polozenie wierzcholkow                                                      |
  |  Zwraca:                                                                       |
- |      Macierz wypelniona wartoscia 0.                                           |
+ |      Cztery wierzcholki prostokata opisane przez podane wektory                                           |
  */
 Rectangle::Rectangle(Vector const &v1X, Vector const &v2X, Vector const &v3X, Vector const &v4X)
 {
