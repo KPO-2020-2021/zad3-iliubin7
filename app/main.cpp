@@ -128,8 +128,9 @@ int main() {
   double argumentsM[][SIZE] = {{1.0, 2.0},{3.0, 4.0}};
   Matrix tmpM2 = Matrix(argumentsM);
   std::cout << "Matrix - konstruktor parametryczny:\n" << tmpM2 << std::endl;
-
-  Rectangle tmpR1;
+  
+  std::cout << "Rectangle" << std::endl;
+  Rectangle tmpR1 = Rectangle();
   std::cout <<"Rectangle - konstruktor bezparametryczny:\n" << tmpR1 << std::endl;
 
     PzG::LaczeDoGNUPlota  Lacze;  // Ta zmienna jest potrzebna do wizualizacji
