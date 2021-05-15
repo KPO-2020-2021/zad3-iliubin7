@@ -1,33 +1,36 @@
 
 #include "../include/rectangle.hh"
-#include "../include/matrix.hh"
-#include <iostream>
-#include <cmath>
-#include "../include/size.hh"
 
 // Konstruktor bezparametryczny
 Rectangle::Rectangle()
 {
-    double args1[2] = {2,1}, args2[2] = {5,1}, args3[2] = {5,4}, args4[2] = {2,4};
-    v1 = Vector(args1);
-    v2 = Vector(args2);
-    v3 = Vector(args3);
-    v4 = Vector(args4);
+    double r[SIZE];
+    int i;
+    r[0]=1.0;
+    r[1]=1.0;
+    for (i=2;i<SIZE;++i)
+        r[i]=0.0;
+    v[0] = Vector(r);
+    r[1]=-1.0; 
+    v[1]=Vector(r);
+    r[0]=-1.0;
+    v[2]=Vector(r);
+    r[1]=1.0; 
+    v[3]=Vector(r);
 }
 
 /******************************************************************************
- |  Konstruktor klasy Rectangle                                                   |
+ |  Konstruktor parametryczny klasy Rectangle                                                   |
  |  Argumenty:                                                                    |
  |      v1X, v2X, v3X, v4X - cztery wektory, ktore reprezentuja polozenie wierzcholkow                                                      |
  |  Zwraca:                                                                       |
  |      Cztery wierzcholki prostokata opisane przez podane wektory                                           |
  */
-Rectangle::Rectangle(Vector const &v1X, Vector const &v2X, Vector const &v3X, Vector const &v4X)
+Rectangle::Rectangle(Vector const (*v)[NUMBEROFVERTEX])
 {
-    v1 = v1X;
-    v2 = v2X;
-    v3 = v3X;
-    v4 = v4X;
+    for (int i=0;i<NUMBEROFVERTEX; ++i){
+        v[i]=ar[i];
+    }
 }
 
 /******************************************************************************
@@ -37,43 +40,69 @@ Rectangle::Rectangle(Vector const &v1X, Vector const &v2X, Vector const &v3X, Ve
  |  Zwraca:                                                                       |
  |      prostokat z przesunietymi wierzcholkami o zadany wektor                                        |
  */
-Rectangle Rectangle::translation(Vector const &t) 
+Rectangle Rectangle::translation(Vector const &t) const
 {
-    Rectangle translate;
-    translate.v1 = v1 + t;
-    translate.v2 = v2 + t;
-    translate.v3 = v3 + t;
-    translate.v4 = v4 + t;
+    Rectangle translated;
+    int i;
+    for (i=0;i<NUMBEROFVERTEX;++i){
+        translated.v[i] = v[i] + t;
+    }
 
-    return translate;
+    return translated;
+}
+/******************************************************************************
+ |  metoda translacji prostokata o zadany wektor                                                |
+ |  Argumenty:                                                                    |
+ |      brak                                                      |
+ |  Zwraca:                                                                       |
+ |      prostokat z przesunietymi wierzcholkami o zadany wektor                                        |
+ */
+Rectangle Rectangle::translation() const
+{
+    Rectangle translated;
+    Vector t;
+    std::cin.ignore(100000, '\n');
+    std::cout<<"Wprowadz wspolrzedne x i y wektora translacji\n";
+    std::cin>>t;
+    for (int i=0;i<NUMBEROFVERTEX;++i){
+        translated.v[i] = v[i] + t;
+    }
+
+    return translated;
 }
 
-// metoda zapisu danych do pliku
-void Rectangle::Writetofile(std:: string filename, int mode)
+// metoda zapisu danych wspolrzednych wierzcholkow prostokata do pliku z ktorego gnuplot bedzie rysowal prostokat
+bool Rectangle::Writetofile(std:: string filename)
 {
-        std::ofstream Dataf;
-        if(mode == 1)
-        Dataf.open(filename, std::ios::trunc);
-        else
-        Dataf.open(filename, std::ios::app);
+        std::ofstream StrmPlikowy;
 
-        fclose(stdout);
+       StrmPlikowy.open(filename);
+       if (!StrmPlikowy.is_open())
+       {
+              std::cerr << ":(  Operacja otwarcia do zapisu \"" << filename << "\"" << std::endl
+                        << ":(  nie powiodla sie." << std::endl;
+              return false;
+       }
+
+       this->RectangleToStdout(StrmPlikowy);
+
+       StrmPlikowy.close();
+       return !StrmPlikowy.fail();
 }
 
 /******************************************************************************
  |  metoda, ktora zwraca wierzcholki prostokata                                                 |
  |  Argumenty:                                                                    |
- |      &v1X, &v2X, &v3X, &v4X                                                    |
+ |     tablica wektorow do ktorej sa zwracane wiercholki prostokata                                                |
  |  Zwraca:                                                                       |
  |      zmienione wartosci wektorow z wejscia                                          |
  */
 
-void Rectangle::new_rectangle(Vector &v1X, Vector &v2X, Vector &v3X, Vector &v4X)
+void Rectangle::new_rectangle(Vector const (&ar)[NUMBEROFVERTEX])
 {
-     v1 = v1X;
-     v2 = v2X;
-     v3 = v3X;
-     v4 = v4X;
+    for (int i=0;i<NUMBEROFVERTEX;i++){
+        v[i]=v[i];
+    }
 }
 
 /******************************************************************************
@@ -84,83 +113,93 @@ void Rectangle::new_rectangle(Vector &v1X, Vector &v2X, Vector &v3X, Vector &v4X
  |  Zwraca:                                                                       |
  |      zmienione wartosci wektorow z wejscia                                          |
  */
-bool Rectangle::rotate(const double angle, const int n)
+Rectangle Rectangle::rotate(const double &angle) const
 {
+    Rectangle rotated;
     
-       if((static_cast <int> (angle) % 360) == 0)
-           return false;
-        for(int i = 0; i < n; i++)
-        {
-       Matrix matrixRotate;
-       matrixRotate.MatrixRotate(angle);
-       v1 = matrixRotate * v1;
-       v2 = matrixRotate * v2;
-       v3 = matrixRotate * v3;
-       v4 = matrixRotate * v4;
-        }
-       return true;   
-    
-}
+    rotated.v[0] = v[0].rotate(angle);
+    rotated.v[1] = v[1].rotate(angle);
+    rotated.v[2] = v[2].rotate(angle);
+    rotated.v[3] = v[3].rotate(angle);
 
+    return rotated;
+}
+// metoda rotacji prostokata o kat podany przez uzytkownika
+Rectangle Rectangle::rotate() const{
+    double angle;
+    Rectangle rotated;
+    std::cin.ignore(100000, '\n');
+    std::cout<<"Podaj kat obrotu w stopniach: " << std::endl;
+    std::cin>> angle;
+    rotated.v[0] = v[0].rotate(angle);
+    rotated.v[1] = v[1].rotate(angle);
+    rotated.v[2] = v[2].rotate(angle);
+    rotated.v[3] = v[3].rotate(angle);
+
+    return rotated;
+}
 // metoda sprawdzania dlugosci bokow prostokata
-void Rectangle::check_length()
+bool Rectangle::check_length(Vector const (&vx)[NUMBEROFVERTEX]) const
 {
    double length[NUMBEROFVERTEX];
-   length[0] = (v2 - v1).modul();
-   length[1] = (v3 - v4).modul();
-   length[2] = (v4 - v1).modul();
-   length[3] = (v3 - v2).modul();
-   if(length[0] > length[2])
-   {
-       // Boki length[0] i length[1] sa dluzsze, a boki length[2] i length[3] sa krotsze
-     if(length[0] == length[1])
-      std::cout << "Dluzsze przeciwlegle boki sa sobie rowne." << std::endl;
-      else
-      std::cout << "Dluzsze przeciwlegle boki nie sa sobie rowne!!!" << std::endl;
-    // wyswietlanie dlugosci dluzszych bokow
-    std::cout << "Dlugosc pierwszego boku:" << std::fixed << std::setprecision(20) << length[0] << std::endl;
-    std::cout << "Dlugosc drugiego boku:" << std::fixed << std::setprecision(20) << length[1] << std::endl;
-    if(length[2] == length[3])
-    std::cout << "Krotsze przeciwlegle boki sa sobie rowne." << std::endl;
-    else
-    std::cout << "Krotsze przeciwlegle boki nie sa sobie rowne!!!" << std::endl;
-    // wyswietlanie dlugosci krotszych bokow
-    std::cout << "Dlugosc pierwszego boku:" << std::fixed << std::setprecision(20) << length[2] << std::endl;
-    std::cout << "Dlugosc drugiego boku:" << std::fixed << std::setprecision(20) << length[3] << std::endl;
-    }
-    else
-    {
-        // Boki length[0] i length[1] sa krotsze, a boki length[2] i length[3] sa dluzsze
-        if(length[2] == length[3])
-        std::cout << "Dluzsze przeciwlegle boki sa sobie rowne." << std::endl;
-        else
-        std::cout << "Dluzsze przeciwlegle boki nie sa sobie rowne!!!" << std::endl;
-        // wyswietlanie dlugosci bokow
-        std::cout << "Dlugosc pierwszego boku:" << std::fixed << std::setprecision(20) << length[2] << std::endl;
-        std::cout << "Dlugosc drugiego boku:" << std::fixed << std::setprecision(20) << length[3] << std::endl;
-        if(length[0] == length[1])
-        std::cout << "Krotsze przeciwlegle boki sa sobie rowne." << std::endl;
-        else
-        std::cout << "Krotsze przeciwlegle boki nie sa sobie rowne!!!" << std::endl;
-        // wyswietlanie dlugosci krotszych bokow
-        std::cout << "Dlugosc pierwszego boku:" << std::fixed << std::setprecision(20) << length[0] << std::endl;
-        std::cout << "Dlugosc drugiego boku:" << std::fixed << std::setprecision(20) << length[1] << std::endl;
-    }
-    
+for (int i=0;i<NUMBEROFVERTEX;++i){
+    length[i]=vx[i].get_length();
 }
-
+if (!(length[0] == length[2]) && (length[1] == length[3])){
+    std::cerr << "ERROR: przeciwlegle boki nie sa rowne!" << std::endl;
+    return 0;
+}
+int j=0;
+if(length[0]!=length[1]){
+if(!(length[0]>length[1]))    j++;
+std::cout << "Dluzsze przeciwlegle boki sa sobie rowne" << std::endl
+          // wyswietlanie dlugosci bokow prostokata
+          << "Dlugosc pierwszego boku: " << length[j] << std::endl
+          << "Dlugosc drugiego boku: " << length[j+2] << std::endl << std::endl;
+if(!(length[0]>length[1]))    j--;
+std::cout << "Krotsze przeciwlegle boki sa sobie rowne" << std::endl
+          // wyswietlanie dlugosci bokow prostokata
+          << "Dlugosc pierwszego boku: " << length[j] << std::endl
+          << "Dlugosc drugiego boku: " << length[j+2] << std::endl << std::endl;
+}
+else std::cout << "Dany prostokat ma wszystkie boki rowne. Dlugosci bokow to:" 
+   // wyswietlanie dlugosci bokow prostokata
+  << std::endl << length[0] << std::endl << length[1] <<std::endl << length[2]
+  << std::endl << length[3] << std::endl << std::endl;
+return 1;
+}
+/******************************************************************************
+ Metoda obracajaca prostokat n (podanych) razy       
+*/
+Rectangle Rectangle::numberofrotation(){
+    Rectangle rect;
+    double ang, ang_r;
+    int r;
+    std::cout<<"Podaj wartosc kata obrotu w stopniach" << std::endl;
+    std::cin>>ang;
+    std::cout<<"Ile razy operacja obrotu ma byc powtorzona?" << std::endl;
+    std::cin>>r;
+    double dorep = r;
+    ang_r = ang*dorep;
+    rect = this->rotate(ang_r);
+    return rect;
+}
 /******************************************************************************
  |  Przeciazenie operatora <<                                          |
  |  Argumenty:                                                                |
  |      out - strumien wyjsciowy,                                              |
  |      Rec- prostokat.                                                         |
  */
-std::ostream& operator << (std::ostream &out, Rectangle const &Rec)
+std::ostream &operator<<(std::ostream &out, Rectangle const &Rec)
 {
-    out << Rec.v1 << std::endl;
-    out << Rec.v2 << std::endl;
-    out << Rec.v3 << std::endl;
-    out << Rec.v4 << std::endl;
+    out << std::setprecision(20) << std::fixed;
+    Vector vx[NUMBEROFVERTEX];
+    Rec.new_rectangle( vx);
+    out << "Wierzcholek A: " << std::endl << vx[0] << std::endl;
+    out << "Wierzcholek B: " << std::endl << vx[1] << std::endl;
+    out << "Wierzcholek C: " << std::endl << vx[2] << std::endl;
+    out << "Wierzcholek D: " << std::endl << vx[3] << std::endl;
+
     return out;
 }
 
@@ -173,10 +212,12 @@ std::ostream& operator << (std::ostream &out, Rectangle const &Rec)
 std::ofstream& operator << (std::ofstream &fout, Rectangle const &Rec)
 {
     fout << std::setprecision(20) << std::fixed;
-    fout << Rec.v1 << std::endl;
-    fout << Rec.v2 << std::endl;
-    fout << Rec.v3 << std::endl;
-    fout << Rec.v4 << std::endl;
+    Vector vx[NUMBEROFVERTEX];
+    Rec.new_rectangle( vx);
+    fout << "Wierzcholek A: " << std::endl << vx[0] << std::endl;
+    fout << "Wierzcholek B: " << std::endl << vx[1] << std::endl;
+    fout << "Wierzcholek C: " << std::endl << vx[2] << std::endl;
+    fout << "Wierzcholek D: " << std::endl << vx[3] << std::endl;
     return fout;
 }
 
