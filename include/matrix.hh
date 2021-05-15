@@ -16,6 +16,8 @@ public:
 
     Matrix();                               // Konstruktor klasy
 
+    ~Matrix();                              // Destruktor klasy
+
     Vector operator * (Vector tmp);           // Przeciazenie operatora mnożenia macierzy razy wektor
 
     Matrix operator + (Matrix tmp);           // Przeciazenie operatora dodawania macierzy
@@ -24,11 +26,15 @@ public:
     
     const double &operator () (unsigned int row, unsigned int column) const; // Przeciazenie operatora funkcyjnego do pobierania wartosci macierzy
 
-    Matrix MatrixRotate(double angle);  // metoda generujaca macierz obrotu o zadany kat
+     //void MatrixRotate(double angle);  metoda generujaca macierz obrotu o zadany kat
     
-    bool operator == (const Matrix &matrix) const;  // przeciazenie operatora porownywania dwoch macierzy
+    bool operator == (const Matrix &tmp) const;  // przeciazenie operatora porownywania dwoch macierzy
     
-    bool operator != (const Matrix &matrix) const;  // przeciazenie operatora != porownywania dwoch macierzy
+    Matrix multiply(Matrix const &mat) const;   // metoda dla mnozenia dwoch macierzy
+
+    Matrix gauss() const;   // metoda generujaca macierz schodkowa za pomoca eliminacji Gaussa
+
+    double determinant() const;  // metoda obliczania wyznacznika macierzy 
 };
 
 std::istream &operator >> (std::istream &in, Matrix &mat); // Przeciazenie operatora wpisywania wartosci macierzy

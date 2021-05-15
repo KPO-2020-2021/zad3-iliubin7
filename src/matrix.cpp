@@ -1,6 +1,7 @@
 #include <cmath>
 #include <iostream>
 #include "matrix.hh"
+#include "vector.hh"
 
 /******************************************************************************
  |  Konstruktor klasy Matrix.                                                 |
@@ -32,6 +33,9 @@ Matrix::Matrix(double tmp[SIZE][SIZE]) {
     }
 }
 
+// Destruktor klasy
+Matrix::~Matrix(){}
+
 /******************************************************************************
  |  Realizuje mnozenie macierzy przez wektor.                                 |
  |  Argumenty:                                                                |
@@ -50,7 +54,6 @@ Vector Matrix::operator * (Vector tmp) {
     }
     return result;
 }
-
 /******************************************************************************
  |  Przeciążenie dodawania macierzy                                                          |
  |  Argumenty:                                                                |
@@ -121,8 +124,8 @@ const double &Matrix::operator () (unsigned int row, unsigned int column) const 
       angle - podany kat (w stopniach)
   Zwraca:
      Macierz obrotu, czyli macierz wypelniona wartosciami cos i sin podanego kata przeksztalconego w radiany
-*/
-Matrix Matrix::MatrixRotate(double angle)
+
+void Matrix::MatrixRotate(double angle)
 {
     if(SIZE != 2)
     std::cout << ("niewlasciwy rozmiar macierzy!");
@@ -135,22 +138,27 @@ Matrix Matrix::MatrixRotate(double angle)
     value[0][1]= sin(angle_radian);
     value[1][1] = cos(angle_radian);
     }
-}
+} */
 
-bool Matrix::operator == (const Matrix &matrix) const
-{
-    for(int i = 0; i < SIZE; i++)
-       for(int j = 0; j < SIZE; j++)
-          if(this->value[i][j] != matrix.value[i][j])
-          return false;
-    return true;
+/******************************************************************************
+ *  Przeciążenie == macierzy                                                         
+ *  Argumenty:                                                               
+ *      \param[in] this - macierz, ktora porownujemy                   
+ *      \param[in] tmp - macierz, z ktora porownujemy                                                          
+ *  Zwraca:                                                                  
+ *      \retval true - jesli sa rowne
+ *      \retval false - jesli nie sa                
+ */
+bool Matrix::operator == (Matrix const &tmp) const{
+    int i,j;
+    for (i=0;i<SIZE;++i){
+        for (j=0;j<SIZE;++j){
+            if (abs(value[i][j]-tmp.value[i][j])<=0.000001)
+                return true;
+        }
+    }
+    return false;
 }
-
-bool Matrix::operator != (const Matrix &matrix) const
-{
-    return !(*this == matrix);
-}
-
 
 /******************************************************************************
  |  Przeciazenie operatora >>                                                 |
@@ -182,7 +190,68 @@ std::ostream &operator << (std::ostream &out, const Matrix &mat) {
     }
     return out;
 }
+/******************************************************************************
+ *  Zwraca wynik mnozenia dwoch macierzy                                                      
+ *  Argumenty:                                                               
+ *      \param[in] this - macierz 1 (L)
+ *      \param mat - macierz 2 (P)                                                             
+ *  Zwraca:                                                                  
+ *      \param[out] res - wynik mnozenia macierzy               
+ */
+Matrix Matrix::multiply(Matrix const &mat) const{
+    int i,j,k;
+    Matrix res;
+    for (i=0; i<SIZE; i++){
+        res.value[i][i] = 0;    //zerowanie elementow macierzy ktore sa rowne 1 
+                                //(z konstruktora bezparametrycznego)
+    }
+    for (i=0; i< SIZE; ++i){
+        for (j=0; j< SIZE; ++j){
+            for (k=0;k<SIZE;k++){
+                res.value[i][j]+= value[i][k] * mat.value[k][j];
+            }
+        }
+    }
+    return res;
+}
+/******************************************************************************
+ *  Zwraca macierz schodkowa utworzona przez eliminacje gaussa                                                        
+ *  Argumenty:                                                               
+ *      \param[in] this - macierz dla ktorej chcemy przeprowadzic operacje                                                           
+ *  Zwraca:                                                                  
+ *      \param[out] mat - macierz schodkowa              
+ */
+Matrix Matrix::gauss() const{
+    Matrix mat = *this;
 
-
+    double ratio;
+    for (int i=0;i<SIZE-1;i++){
+        if (value[i][i] == 0)
+            return 0;
+        for (int j=i+1; j<SIZE; j++){
+            ratio = value[j][i] / value[i][i];
+            for (int k=0; k<SIZE; k++){
+                mat.value[j][k] = (value[j][k] - ratio*value[i][k]);
+            }
+        }
+    }
+    return mat;
+}
+/******************************************************************************
+ *  Zwraca wyznacznik macierzy                                                       
+ *  Argumenty:                                                               
+ *      \param[in] this - macierz, ktorej wyznacznik liczymy                                                             
+ *  Zwraca:                                                                  
+ *      \param[out] det - wyznacznik               
+ */
+double Matrix::determinant() const{
+    double det;
+    Matrix tmp = this->gauss();
+    det = 1;
+    for (int i=0;i<SIZE;++i){
+        det*=tmp.value[i][i];
+    }
+    return det;
+}
 
 
