@@ -33,6 +33,8 @@ Rectangle::Rectangle(Vector const (*v)[NUMBEROFVERTEX])
     }
 }
 
+//Destruktor prostokata
+Rectangle::~Rectangle(){};
 /******************************************************************************
  |  metoda translacji prostokata o zadany wektor                                                |
  |  Argumenty:                                                                    |
