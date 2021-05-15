@@ -62,6 +62,37 @@ TEST_CASE("test == 20 miejsc po przecinku")
    y = Vector(tab2);
    CHECK(x == y);
 }
+TEST_CASE("test rotacja"){
+    double tab[SIZE][SIZE] = {{3,4},{-4,3}};
+    double ang;
+    Vector a(tab[0]);
+    ang =90;
+    Vector b = a.rotation(ang);
+    Vector res(tab[1]);
+    
+        CHECK((res == b));
+}
+TEST_CASE("test rotacja o 360 stopni"){
+    double tab[SIZE][SIZE] = {{3,4},{3,4}};
+    double ang;
+    Vector a(tab[0]);
+    ang =360;
+    Vector b = a.rotation(ang);
+    Vector res(tab[1]);
+    
+        CHECK((res == b));
+}
+TEST_CASE("test rotacja o 0 stopni"){
+    double tab[SIZE][SIZE] = {{3,4},{3,4}};
+    double ang;
+    Vector a(tab[0]);
+    ang =0;
+    Vector b = a.rotation(ang);
+    Vector res(tab[1]);
+
+        CHECK((res == b));
+}
+
 TEST_CASE("test wczytywanie vector standard")
 {
     Vector x;
