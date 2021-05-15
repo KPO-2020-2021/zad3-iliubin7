@@ -117,10 +117,10 @@ Rectangle Rectangle::rotate(const double &angle) const
 {
     Rectangle rotated;
     
-    rotated.v[0] = v[0].rotate(angle);
-    rotated.v[1] = v[1].rotate(angle);
-    rotated.v[2] = v[2].rotate(angle);
-    rotated.v[3] = v[3].rotate(angle);
+    rotated.v[0] = v[0].rotation(angle);
+    rotated.v[1] = v[1].rotation(angle);
+    rotated.v[2] = v[2].rotation(angle);
+    rotated.v[3] = v[3].rotation(angle);
 
     return rotated;
 }
@@ -131,10 +131,10 @@ Rectangle Rectangle::rotate() const{
     std::cin.ignore(100000, '\n');
     std::cout<<"Podaj kat obrotu w stopniach: " << std::endl;
     std::cin>> angle;
-    rotated.v[0] = v[0].rotate(angle);
-    rotated.v[1] = v[1].rotate(angle);
-    rotated.v[2] = v[2].rotate(angle);
-    rotated.v[3] = v[3].rotate(angle);
+    rotated.v[0] = v[0].rotation(angle);
+    rotated.v[1] = v[1].rotation(angle);
+    rotated.v[2] = v[2].rotation(angle);
+    rotated.v[3] = v[3].rotation(angle);
 
     return rotated;
 }
