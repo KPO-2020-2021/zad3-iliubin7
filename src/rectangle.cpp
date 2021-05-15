@@ -98,10 +98,10 @@ bool Rectangle::Writetofile(std:: string filename)
  |      zmienione wartosci wektorow z wejscia                                          |
  */
 
-void Rectangle::new_rectangle(Vector const (&ar)[NUMBEROFVERTEX])
+void Rectangle::new_rectangle(Vector const (&ar)[NUMBEROFVERTEX]) const
 {
     for (int i=0;i<NUMBEROFVERTEX;i++){
-        v[i]=v[i];
+        ar[i]=v[i];
     }
 }
 
