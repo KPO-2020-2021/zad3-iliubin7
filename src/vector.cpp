@@ -1,6 +1,5 @@
 
-#include <cmath>
-#include <iostream>
+#include "matrix.hh"
 #include "vector.hh"
 #include "size.hh"
 
@@ -33,6 +32,8 @@ Vector::Vector(double tmp[SIZE]) {
     }
 }
 
+// Destruktor klasy
+Vector::~Vector(){}
 
 /******************************************************************************
  |  Realizuje dodawanie dwoch wektorow.                                       |
@@ -43,10 +44,10 @@ Vector::Vector(double tmp[SIZE]) {
  |      Sume dwoch skladnikow przekazanych jako wskaznik                      |
  |      na parametr.                                                          |
  */
-Vector Vector::operator + (const Vector &v) {
+Vector Vector::operator + (const Vector &v) const{
     Vector result;
     for (int i = 0; i < SIZE; ++i) {
-        result[i] = size[i] += v[i];
+        result[i] = size[i] + v[i];
     }
     return result;
 }
@@ -61,13 +62,16 @@ Vector Vector::operator + (const Vector &v) {
  |      Roznice dwoch skladnikow przekazanych jako wskaznik                   |
  |      na parametr.                                                          |
  */
-Vector Vector::operator - (const Vector &v) {
+Vector Vector::operator-(const Vector &v) const
+{
     Vector result;
-    for (int i = 0; i < SIZE; ++i) {
-        result[i] = size[i] -= v[i];
+    for (int i = 0; i < SIZE; ++i)
+    {
+        result[i] = size[i] - v[i];
     }
     return result;
 }
+
 
 
 /******************************************************************************
@@ -80,10 +84,10 @@ Vector Vector::operator - (const Vector &v) {
  |      na parametr.                                                          |
  */
 
-Vector Vector::operator * (const double &tmp) {
+Vector Vector::operator * (const double &tmp) const {
     Vector result;
     for (int i = 0; i < SIZE; ++i) {
-        result[i] = size[i] *= tmp;
+        result[i] = size[i] * tmp;
     }
     return result;
 }
@@ -144,17 +148,38 @@ std::istream &operator >> (std::istream &in, Vector &tmp) {
     return in;
 }
 /******************************************************************************
- |  Metoda do znajdowania dlugosci wektora                                              |
+ |  Metoda do znajdowania kwadrata dlugosci wektora                                              |
  |  Argumenty:                                                                |
  |      brak                                              |
  |  Zwraca:
         dlugosc wektora                                                     |
  */
-double Vector::modul() const
+double Vector::modul2() const
 {
    double result;
-   result = pow(size[0]*size[0] + size[1]*size[1], 0.5);
-   return result;      
+   for (int i = 0; i < SIZE; i++)
+    {
+        result += pow(size[i], 2);
+    }
+    return result;      
+}
+
+/******************************************************************************
+ * Zwraca dlugosc wektora                                                    
+ * Argumenty:                                                                
+ *      Brak                                                                 
+ * Zwraca:                                                                   
+ *      \param[out] length - dlugosc wektora                                                      
+ */
+double Vector::get_length() const
+{
+    double len, mod2;
+    Vector tmp;
+    tmp = *this;
+    mod2 = tmp.modul2();
+    len = pow(mod2, 1.0 / SIZE);
+
+    return len;
 }
 
 /******************************************************************************
@@ -166,24 +191,19 @@ double Vector::modul() const
  */
 Vector Vector::rotation(const double &angle) const
 {
-    Vector rotate;
+    Vector rotated;
     double angle_radian = angle * M_PI / 180;
     if(SIZE == 2)
     {
         double tmp[][SIZE] = {{cos(angle_radian), -sin(angle_radian)}, {sin(angle_radian), cos(angle_radian)}};
         Matrix transformation(tmp);
-        rotate = transformation * *this;
+        rotated = transformation * *this;
     }
     else
     {
       std::cerr << "ERROR: Nie zdefiniowano macierzy obrotu dla przestrzeni innej niz dwuwymiarowa." << std::endl;
     }
-    return rotate;
-}
-
-double Vector::kat_obrotu() const
-{
-    
+    return rotated;
 }
 
 /******************************************************************************
@@ -195,11 +215,11 @@ double Vector::kat_obrotu() const
     a w przypadku przeciwnym zwraca wartosc 0                                                         |
  */
 
-bool Vector::operator == (const Vector v) const
+bool Vector::operator == (const Vector &v) const
 {
-    if(abs(size[0] - v[0]) < MIN_DIFF && abs(size[1]- v[1]) < MIN_DIFF)
-    {
-        return true;
+     for (int i=0;i<SIZE;i++){
+        if ((abs(size[i] - v.size[i]) <= MIN_DIFF))
+            return true;
     }
     return false;
 }

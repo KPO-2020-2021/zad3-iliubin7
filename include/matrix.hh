@@ -10,7 +10,7 @@ class Matrix {
 
 private:
     double value[SIZE][SIZE];               // Wartosci macierzy
-
+    
 public:
     Matrix(double [SIZE][SIZE]);            // Konstruktor klasy
 
@@ -18,7 +18,7 @@ public:
 
     ~Matrix();                              // Destruktor klasy
 
-    Vector operator * (Vector tmp);           // Przeciazenie operatora mnożenia macierzy razy wektor
+    Vector operator * (Vector tmp);             // Przeciazenie operatora mnożenia macierzy razy wektor
 
     Matrix operator + (Matrix tmp);           // Przeciazenie operatora dodawania macierzy
 

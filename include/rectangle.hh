@@ -28,7 +28,7 @@ public:
 
    Rectangle rotate() const;   // metoda rotacji prostokata (kat podaje uzytkownik)
 
-   void new_rectangle(Vector const (&ar)[NUMBEROFVERTEX]) const;  // metoda zwracajaca prostokat
+   void new_rectangle( Vector ((&ar)[NUMBEROFVERTEX])) const;  // metoda zwracajaca wierzcholki prostokata
 
    bool check_length(Vector const (&vx)[NUMBEROFVERTEX]) const; // metoda sprawdzania dlugosci przeciwleglych bokow prostokata
 
@@ -36,9 +36,11 @@ public:
 
    bool Writetofile(std:: string filename); // metoda zapisu danych do pliku
    
-   bool operator == (const Rectangle &Rec) const;
+   bool operator == (const Rectangle &Rec) const;   // przeciazenie operatora == 
+
+   void RectangleToStdout(std::ostream &StrmWy);  //zapisuje wierzcholki do wyjscia
    
-   void PrintRectangle();      
+   void PrintRectangle();   // Metoda wyswietlajaca prostokat w Gnuplocie   
     
 };
 std::ostream &operator << (std::ostream &out, Rectangle const &Rec);  // Przeciazenie operatora wpisywania 

@@ -22,11 +22,11 @@ Rectangle::Rectangle()
 /******************************************************************************
  |  Konstruktor parametryczny klasy Rectangle                                                   |
  |  Argumenty:                                                                    |
- |      v1X, v2X, v3X, v4X - cztery wektory, ktore reprezentuja polozenie wierzcholkow                                                      |
+ |      ar[NUMBEROFVERTEX] - tablica wektorow reprezentujacych polozenie wierzcholkow                                                    |
  |  Zwraca:                                                                       |
  |      Cztery wierzcholki prostokata opisane przez podane wektory                                           |
  */
-Rectangle::Rectangle(Vector const (*v)[NUMBEROFVERTEX])
+Rectangle::Rectangle(Vector const (&ar)[NUMBEROFVERTEX])
 {
     for (int i=0;i<NUMBEROFVERTEX; ++i){
         v[i]=ar[i];
@@ -34,7 +34,8 @@ Rectangle::Rectangle(Vector const (*v)[NUMBEROFVERTEX])
 }
 
 //Destruktor prostokata
-Rectangle::~Rectangle(){};
+Rectangle::~Rectangle(){}
+
 /******************************************************************************
  |  metoda translacji prostokata o zadany wektor                                                |
  |  Argumenty:                                                                    |
@@ -100,7 +101,7 @@ bool Rectangle::Writetofile(std:: string filename)
  |      zmienione wartosci wektorow z wejscia                                          |
  */
 
-void Rectangle::new_rectangle(Vector const (&ar)[NUMBEROFVERTEX]) const
+void Rectangle::new_rectangle( Vector (&ar)[NUMBEROFVERTEX]) const
 {
     for (int i=0;i<NUMBEROFVERTEX;i++){
         ar[i]=v[i];
@@ -181,10 +182,63 @@ Rectangle Rectangle::numberofrotation(){
     std::cin>>ang;
     std::cout<<"Ile razy operacja obrotu ma byc powtorzona?" << std::endl;
     std::cin>>r;
-    double dorep = r;
-    ang_r = ang*dorep;
+    double d = r;
+    ang_r = ang*d;
     rect = this->rotate(ang_r);
     return rect;
+}
+/******************************************************************************
+ *  Przeciążenie == prostokata                                                         
+ *  Argumenty:                                                               
+ *      \param[in] this - prostokat, ktora porownujemy                   
+ *      \param[in] tmp - prostokat, z ktora porownujemy                                                          
+ *  Zwraca:                                                                  
+ *      \retval true - jesli sa rowne
+ *      \retval false - jesli nie sa                
+ */
+bool Rectangle::operator == (const Rectangle &rec) const{
+    int i;
+    for (i=0;i<NUMBEROFVERTEX;++i){
+        if (!(v[i]==rec.v[i]))
+            return 0;
+    }
+    return 1;
+}
+/******************************************************************************
+ * Metoda Kierujaca wspolrzedne prostokata na strumien wyjsciowy                       
+ * Argumenty:                                                                 
+ *      \param[in] out - strumien wyjsciowy                                                                  
+ * Zwraca:                                                                    
+ *      \param[out] out - strumien wyjsciowy z zapisanymi wspolrzednymi                                                                 
+ */
+void Rectangle::RectangleToStdout(std::ostream &out)
+{
+    for (int i=0;i<NUMBEROFVERTEX;++i){
+        out<<std::setw(10) << std::fixed << std::setprecision(10) << v[i][0] <<" " << v[i][1] << std::endl;
+    }
+    out<<v[0][0] <<" " << v[0][1] << std::endl;
+}
+/******************************************************************************
+ * Metoda wyswietlajaca prostokat w GNUplocie                                            *
+ * Argumenty:                                                                 *
+ *      brak                                                                  *
+ * Zwraca:                                                                    *
+ *      brak                                                                  *
+ */
+void Rectangle::PrintRectangle(){
+    PzG::LaczeDoGNUPlota Lacze; // Ta zmienna jest potrzebna do wizualizacji
+
+       Lacze.DodajNazwePliku("../datasets/prostokat.dat", PzG::RR_Ciagly, 2);
+
+       Lacze.DodajNazwePliku("../datasets/prostokat.dat", PzG::RR_Punktowy, 2);
+
+       Lacze.ZmienTrybRys(PzG::TR_2D);
+           this->RectangleToStdout(std::cout);
+       if (!this->Writetofile("../datasets/prostokat.dat"))
+              std::cerr << "ERROR" << std::endl;
+       Lacze.Rysuj(); // <- Tutaj gnuplot rysuje, to co zapisaliśmy do pliku
+       std::cout << "Naciśnij ENTER, aby kontynuowac" << std::endl;
+       std::cin.ignore(100000, '\n');
 }
 /******************************************************************************
  |  Przeciazenie operatora <<                                          |

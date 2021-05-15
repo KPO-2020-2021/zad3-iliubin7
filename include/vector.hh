@@ -3,8 +3,8 @@
 #include "size.hh"
 #include <iostream>
 #include <iomanip>
-#include "matrix.hh"
-#define MIN_DIFF 0.0000000001
+#include <cmath>
+#define MIN_DIFF 0.000001
 
 class Vector {
 
@@ -18,21 +18,21 @@ public:
 
     Vector(double [SIZE]);           // Konstruktor klasy
 
-    Vector operator + (const Vector &v);   // Przeciazenie operatora +
+    ~Vector();                   // Destruktor klasy
 
-    Vector operator - (const Vector &v);   // Przeciazenie operatora -
+    Vector operator + (const Vector &v) const;   // Przeciazenie operatora +
 
-    Vector operator * (const double &tmp);  // Przeciazenie operatora *
+    Vector operator - (const Vector &v) const;   // Przeciazenie operatora -
+
+    Vector operator * (const double &tmp) const;  // Przeciazenie operatora *
 
     Vector rotation(const double &angle) const; 
 
-    double modul() const;  // metoda do znajdowania dlugosci wektora
+    double modul2() const;  // metoda do znajdowania kwadrata dlugosci wektora
 
-    double get_length() const;
-
-    double kat_obrotu() const;
+    double get_length() const;    // metoda do znajdowania dlugosci wektora
       
-    bool operator == (const Vector v) const;  // Przeciazenie operatora ==
+    bool operator == (const Vector &v) const;  // Przeciazenie operatora ==
 
     const double &operator [] (int index) const;   
 
