@@ -14,5 +14,12 @@ Example:
 > make coverage  # Generate a coverage report.
 > make doc       # Generate html documentation.
 ```
+## TESTS
+ 
+To run all tests type:
+``` bash
+> cd build
+> ./unit_tests      # Makes and runs all tests
+```
 
 
